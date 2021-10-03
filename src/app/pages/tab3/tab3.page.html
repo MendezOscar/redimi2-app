@@ -1,0 +1,22 @@
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-img class="img" src="../../../assets/LogoHome.png"></ion-img>
+        </ion-toolbar>
+    </ion-header>
+    <div class="card">
+        <div class="header">
+            <div class="avatar">
+                <img src="../../../assets/Profile.svg" alt="">
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="user-meta ion-text-center">
+                <h3 class="playername">{{user.name}} {{user.lastName}}</h3>
+                <h5 class="country">{{user.phone}}</h5>
+            </div>
+            <br>
+            <ion-button expand="full" (click)="close()" color="danger">Cerrar sesion</ion-button>
+        </div>
+    </div>
+</ion-content>

@@ -1,0 +1,33 @@
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-img class="img" src="../../../assets/LogoHome.png"></ion-img>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="createCitation()">
+            <ion-icon name="add-outline"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <ion-label class="ion-text-uppercase ion-margin-start">Mis citas</ion-label>
+                <ion-card *ngFor="let item of citations" class="card">
+                    <ion-item>
+                        <ion-avatar slot="start">
+                            <img src="../../../assets/barberia.svg">
+                        </ion-avatar>
+                        <ion-label>
+                            <h3>{{item.day | date:'yyyy/MM/dd h:mm a'}}</h3>
+                            <p>A nombre de: {{item.ownername}}</p>
+                            <p>Telefono: {{item.phone}}</p>
+                        </ion-label>
+                    </ion-item>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

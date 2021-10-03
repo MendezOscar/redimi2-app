@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            Barber Shop App
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="content">
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <ion-button [routerLink]="['/register']" expand="block" color="primary">Registrarme</ion-button>
+
+                <span class="already">o</span>
+
+                <span class="already"> ya estas registrado?</span>
+
+                <ion-button [routerLink]="['/login']" expand="block" color="danger">Entrar</ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

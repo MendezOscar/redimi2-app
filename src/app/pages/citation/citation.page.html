@@ -1,0 +1,27 @@
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <ion-img src="../../../../assets/citas.svg"></ion-img>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <form>
+
+                    <ion-item>
+                        <ion-datetime displayFormat="D MMM YYYY hh:mm a" min="2021" max="2100" value="2021-10-02T11:06Z" [(ngModel)]="date" [ngModelOptions]="{standalone: true}"></ion-datetime>
+                    </ion-item>
+
+                    <ion-row>
+                        <ion-col>
+                            <br>
+                            <ion-button type="submit" (click)="createCitation()" color="danger" expand="block">Reservar</ion-button>
+                            <ion-button type="submit" (click)="close()" color="primary" expand="block">Cerrar</ion-button>
+                        </ion-col>
+                    </ion-row>
+                </form>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
