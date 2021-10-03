@@ -33,41 +33,45 @@
                 </ion-slide>
             </ion-slides>
         </ion-row>
+    </ion-grid>
+    <ion-grid>
         <ion-row class="second-row">
-            <ion-label class="ion-text-uppercase ion-margin-start">Anuncios</ion-label>
-            <ion-slides class="card-info">
-                <ion-slide>
-                    <ion-card>
-                        <ion-item>
-                            <ion-avatar slot="start">
-                                <img src="../../../assets/barberia.svg">
-                            </ion-avatar>
-                            <ion-label>
-                                <h3>Horarios de atencion</h3>
-                                <p>Acompananos</p>
-                            </ion-label>
-                        </ion-item>
+            <ion-col>
+                <ion-label class="ion-text-uppercase ion-margin-start">Anuncios</ion-label>
+                <ion-slides class="card-info">
+                    <ion-slide>
+                        <ion-card>
+                            <ion-item>
+                                <ion-avatar slot="start">
+                                    <img src="../../../assets/barberia.svg">
+                                </ion-avatar>
+                                <ion-label>
+                                    <h3>Horarios de atencion</h3>
+                                    <p>Acompananos</p>
+                                </ion-label>
+                            </ion-item>
 
-                        <img class="img-ads" src="../../../assets/horarios.png" alt="ion">
-                    </ion-card>
-                </ion-slide>
+                            <img class="img-ads" src="../../../assets/horarios.png" alt="ion">
+                        </ion-card>
+                    </ion-slide>
 
-                <ion-slide *ngFor="let item of ads">
-                    <ion-card>
-                        <ion-item>
-                            <ion-avatar slot="start">
-                                <img src="../../../assets/barberia.svg">
-                            </ion-avatar>
-                            <ion-label>
-                                <h3>{{item.title}}</h3>
-                                <p>{{item.message}}</p>
-                            </ion-label>
-                        </ion-item>
+                    <ion-slide *ngFor="let item of ads">
+                        <ion-card>
+                            <ion-item>
+                                <ion-avatar slot="start">
+                                    <img src="../../../assets/barberia.svg">
+                                </ion-avatar>
+                                <ion-label>
+                                    <h3>{{item.title}}</h3>
+                                    <p>{{item.message}}</p>
+                                </ion-label>
+                            </ion-item>
 
-                        <img class="img-ads" src="{{item.img}}" alt="ion">
-                    </ion-card>
-                </ion-slide>
-            </ion-slides>
+                            <img class="img-ads" src="{{item.img}}" alt="ion">
+                        </ion-card>
+                    </ion-slide>
+                </ion-slides>
+            </ion-col>
         </ion-row>
     </ion-grid>
 </ion-content>
