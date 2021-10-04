@@ -33,6 +33,25 @@ export class CitationsService {
       .snapshotChanges()
   }
 
+  getDisable(owner: string, day: number, month: number, year: number) {
+    return this.ngFirestore
+      .collection('citations', (ref) => ref.where('state', '==', false)
+      .where('owner', '==', owner)
+      .where('dayOfWeek', '==', day)
+      .where('month', '==', month)
+      .where('year', '==', year))
+      .snapshotChanges()
+  }
+
+  getAllDisable(day: number, month: number, year: number) {
+    return this.ngFirestore
+      .collection('citations', (ref) => ref.where('state', '==', false)
+      .where('dayOfWeek', '==', day)
+      .where('month', '==', month)
+      .where('year', '==', year))
+      .snapshotChanges()
+  }
+
   delete(id: string) {
     this.ngFirestore.doc('citations/' + id).delete();
   }

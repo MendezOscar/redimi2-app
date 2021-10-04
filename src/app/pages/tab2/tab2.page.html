@@ -11,13 +11,22 @@
         </ion-fab-button>
     </ion-fab>
 
-    <ion-grid>
+    <ion-grid *ngIf="showStatusCitation">
         <ion-row>
             <ion-col>
                 <ion-item>
                     <ion-label>Filtrar: </ion-label>
                     <ion-datetime [(ngModel)]="date" [ngModelOptions]="{standalone: true}" placeholder="Seleccionar fecha" (ionChange)="getCitations()"></ion-datetime>
                 </ion-item>
+                <br>
+                <ion-segment [(ngModel)]="showStatusCitation" [ngModelOptions]="{standalone: true}" (ionChange)="segmentChanged($event)">
+                    <ion-segment-button value="true">
+                        <ion-label>Por atender</ion-label>
+                    </ion-segment-button>
+                    <ion-segment-button value="false">
+                        <ion-label>Atendidas</ion-label>
+                    </ion-segment-button>
+                </ion-segment>
                 <br>
                 <br>
                 <ion-label class="ion-text-uppercase ion-margin-start">Mis citas</ion-label>
@@ -31,6 +40,45 @@
                         </ion-label>
                         <ion-icon name="checkmark-outline" *ngIf="userType === 'owner'" (click)="endCitation(item)"></ion-icon>
                         <ion-icon name="pencil" (click)="editCitation(item)"></ion-icon>
+                        <ion-icon name="trash" (click)="deleteCitation(item.id)"></ion-icon>
+                    </ion-item>
+                    <ion-card-content class="card-content">
+                        <p>A nombre de: {{item.ownername}}</p>
+                        <p>Telefono: {{item.phone}}</p>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+
+    <ion-grid *ngIf="!showStatusCitation">
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-label>Filtrar: </ion-label>
+                    <ion-datetime [(ngModel)]="date" [ngModelOptions]="{standalone: true}" placeholder="Seleccionar fecha" (ionChange)="getCitations()"></ion-datetime>
+                </ion-item>
+                <br>
+                <ion-segment>
+                    <ion-segment-button value="friends">
+                        <ion-label>Por atender</ion-label>
+                    </ion-segment-button>
+                    <ion-segment-button value="enemies">
+                        <ion-label>Atendidas</ion-label>
+                    </ion-segment-button>
+                </ion-segment>
+                <br>
+                <br>
+                <ion-label class="ion-text-uppercase ion-margin-start">Mis citas</ion-label>
+                <ion-card *ngFor="let item of citations" class="card">
+                    <ion-item>
+                        <ion-avatar slot="start">
+                            <img src="../../../assets/barberia.svg">
+                        </ion-avatar>
+                        <ion-label>
+                            <h3>{{item.day | date:'yyyy/MM/dd h:mm a'}}</h3>
+                        </ion-label>
                         <ion-icon name="trash" (click)="deleteCitation(item.id)"></ion-icon>
                     </ion-item>
                     <ion-card-content class="card-content">

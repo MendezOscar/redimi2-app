@@ -17,6 +17,7 @@ export class Tab2Page {
   user: User
   userType: string
   date = new Date()
+  showStatusCitation = "true";
 
   constructor(
     private citationService: CitationsService,
@@ -26,7 +27,21 @@ export class Tab2Page {
 
   async ngOnInit() {
     await this.storage.create()
-    this.getCitations()
+    this.getCitations();
+    this.storage.get('user').then((val) => {
+      this.userType = val.type;
+    });
+  }
+
+  segmentChanged(ev: any) {
+    console.log(this.showStatusCitation);
+    if(this.showStatusCitation == "true") {
+      this.getCitations();
+      console.log("entre en activo")
+    }else {
+      console.log("entre en desactivo")
+      this.getCitationsDisables();
+    }
   }
 
   async presentModal() {
@@ -67,7 +82,6 @@ export class Tab2Page {
 
   getCitations() {
     this.storage.get('user').then((val) => {
-      this.userType = val.userType
       var newDate = new Date(this.date)
       if (val.type == 'client') {
         this.citationService
@@ -88,6 +102,40 @@ export class Tab2Page {
       } else {
         this.citationService
           .getAll(newDate.getDate(), newDate.getMonth(), newDate.getFullYear())
+          .subscribe((data) => {
+            this.citations = data.map((t) => {
+              return {
+                id: t.payload.doc.id,
+                ...(t.payload.doc.data() as Citation),
+              }
+            })
+          })
+      }
+    })
+  }
+
+  getCitationsDisables() {
+    this.storage.get('user').then((val) => {
+      var newDate = new Date(this.date)
+      if (val.type == 'client') {
+        this.citationService
+          .getDisable(
+            val.phone,
+            newDate.getDate(),
+            newDate.getMonth(),
+            newDate.getFullYear(),
+          )
+          .subscribe((data) => {
+            this.citations = data.map((t) => {
+              return {
+                id: t.payload.doc.id,
+                ...(t.payload.doc.data() as Citation),
+              }
+            })
+          })
+      } else {
+        this.citationService
+          .getAllDisable(newDate.getDate(), newDate.getMonth(), newDate.getFullYear())
           .subscribe((data) => {
             this.citations = data.map((t) => {
               return {
