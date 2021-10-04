@@ -19,4 +19,19 @@ export class CitationsService {
       .collection('citations', (ref) => ref.where('state', '==', true).where('owner', '==', owner))
       .snapshotChanges()
   }
+
+  delete(id: string) {
+    this.ngFirestore.doc('citations/' + id).delete();
+  }
+
+  update(id, object: Citation) {
+    this.ngFirestore
+      .collection('citations')
+      .doc(id)
+      .update(object)
+      .then(() => {
+        //this.router.navigate(['/members-list']);
+      })
+      .catch((error) => console.log(error));
+  }
 }

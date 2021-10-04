@@ -4,7 +4,8 @@ import { User } from 'src/app/models/User'
 import { Storage } from '@ionic/storage'
 import { CitationsService } from 'src/app/services/citations/citations.service'
 import { ModalController } from '@ionic/angular'
-import { CitationPage } from '../citation/citation.page'
+import { CitationPage } from '../citations/citation-create/citation.page'
+import { CitationEditPage } from '../citations/citation-edit/citation-edit.page'
 
 @Component({
   selector: 'app-tab2',
@@ -34,8 +35,27 @@ export class Tab2Page {
     return await modal.present();
   }
 
+  async presentModalEdit(citation: Citation) {
+    const modal = await this.modalController.create({
+      component: CitationEditPage,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        'citation': citation,
+      }
+    });
+    return await modal.present();
+  }
+
+  editCitation(citation: Citation){
+    this.presentModalEdit(citation);
+  }
+
   createCitation(){
     this.presentModal();
+  }
+
+  deleteCitation(id: string){
+    this.citationService.delete(id);
   }
 
   getCitations() {

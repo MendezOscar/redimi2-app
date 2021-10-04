@@ -20,7 +20,11 @@ const routes: Routes = [
   },
   {
     path: 'citation',
-    loadChildren: () => import('./pages/citation/citation.module').then( m => m.CitationPageModule)
+    loadChildren: () => import('./pages/citations/citation-create/citation.module').then( m => m.CitationPageModule)
+  },
+  {
+    path: 'citation-edit',
+    loadChildren: () => import('./pages/citations/citation-edit/citation-edit.module').then( m => m.CitationEditPageModule)
   }
 ];
 @NgModule({

@@ -22,10 +22,14 @@
                         </ion-avatar>
                         <ion-label>
                             <h3>{{item.day | date:'yyyy/MM/dd h:mm a'}}</h3>
-                            <p>A nombre de: {{item.ownername}}</p>
-                            <p>Telefono: {{item.phone}}</p>
                         </ion-label>
+                        <ion-icon name="pencil" (click)="editCitation(item)"></ion-icon>
+                        <ion-icon name="trash" (click)="deleteCitation(item.id)"></ion-icon>
                     </ion-item>
+                    <ion-card-content class="card-content">
+                        <p>A nombre de: {{item.ownername}}</p>
+                        <p>Telefono: {{item.phone}}</p>
+                    </ion-card-content>
                 </ion-card>
             </ion-col>
         </ion-row>
