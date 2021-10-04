@@ -19,7 +19,6 @@ export class CitationEditPage implements OnInit {
   ) {}
 
   async ngOnInit() {
-    console.log(this.citation);
   }
 
   async presentToast() {

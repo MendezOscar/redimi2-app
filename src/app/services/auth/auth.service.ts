@@ -21,6 +21,14 @@ export class AuthService {
       .snapshotChanges()
   }
 
+  getByPhone(phone: string) {
+    return this.ngFirestore
+      .collection('users', (ref) =>
+        ref.where('phone', '==', phone),
+      )
+      .snapshotChanges()
+  }
+
   getByEmail(phone: string) {
     return this.ngFirestore
       .collection('users', (ref) => ref.where('phone', '==', phone))
@@ -33,7 +41,6 @@ export class AuthService {
       .doc(id)
       .update(object)
       .then(() => {
-        this.router.navigate(['/users-list'])
       })
       .catch((error) => console.log(error))
   }

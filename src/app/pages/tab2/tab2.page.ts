@@ -28,6 +28,7 @@ export class Tab2Page {
   async ngOnInit() {
     await this.storage.create()
     this.getCitations();
+    console.log(this.citations);
     this.storage.get('user').then((val) => {
       this.userType = val.type;
     });
@@ -37,9 +38,7 @@ export class Tab2Page {
     console.log(this.showStatusCitation);
     if(this.showStatusCitation == "true") {
       this.getCitations();
-      console.log("entre en activo")
     }else {
-      console.log("entre en desactivo")
       this.getCitationsDisables();
     }
   }

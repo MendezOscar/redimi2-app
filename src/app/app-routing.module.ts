@@ -25,6 +25,10 @@ const routes: Routes = [
   {
     path: 'citation-edit',
     loadChildren: () => import('./pages/citations/citation-edit/citation-edit.module').then( m => m.CitationEditPageModule)
+  },
+  {
+    path: 'password-recover',
+    loadChildren: () => import('./pages/auth/password-recover/password-recover.module').then( m => m.PasswordRecoverPageModule)
   }
 ];
 @NgModule({
