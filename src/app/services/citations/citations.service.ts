@@ -14,9 +14,22 @@ export class CitationsService {
       .add(Object.assign({}, object))
   }
 
-  get(owner: string) {
+  get(owner: string, day: number, month: number, year: number) {
     return this.ngFirestore
-      .collection('citations', (ref) => ref.where('state', '==', true).where('owner', '==', owner))
+      .collection('citations', (ref) => ref.where('state', '==', true)
+      .where('owner', '==', owner)
+      .where('dayOfWeek', '==', day)
+      .where('month', '==', month)
+      .where('year', '==', year))
+      .snapshotChanges()
+  }
+
+  getAll(day: number, month: number, year: number) {
+    return this.ngFirestore
+      .collection('citations', (ref) => ref.where('state', '==', true)
+      .where('dayOfWeek', '==', day)
+      .where('month', '==', month)
+      .where('year', '==', year))
       .snapshotChanges()
   }
 

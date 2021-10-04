@@ -55,11 +55,15 @@ export class CitationPage implements OnInit {
   createCitation() {
     this.storage.get('user').then((val) => {
       this.citation = new Citation()
+      var newDate = new Date(this.date);
       this.citation.day = this.date
       this.citation.owner = val.phone
       this.citation.ownername = val.name + ' ' + val.lastName
       this.citation.phone = val.phone
       this.citation.state = true
+      this.citation.dayOfWeek = newDate.getDate();
+      this.citation.month = newDate.getMonth();
+      this.citation.year = newDate.getFullYear();
 
       var ifValidateDate = this.validateDate(new Date(this.date))
       if (ifValidateDate) {

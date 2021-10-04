@@ -15,6 +15,8 @@ import { CitationEditPage } from '../citations/citation-edit/citation-edit.page'
 export class Tab2Page {
   citations: Citation[]
   user: User
+  userType: string
+  date = new Date()
 
   constructor(
     private citationService: CitationsService,
@@ -30,9 +32,9 @@ export class Tab2Page {
   async presentModal() {
     const modal = await this.modalController.create({
       component: CitationPage,
-      cssClass: 'my-custom-class'
-    });
-    return await modal.present();
+      cssClass: 'my-custom-class',
+    })
+    return await modal.present()
   }
 
   async presentModalEdit(citation: Citation) {
@@ -40,34 +42,61 @@ export class Tab2Page {
       component: CitationEditPage,
       cssClass: 'my-custom-class',
       componentProps: {
-        'citation': citation,
-      }
-    });
-    return await modal.present();
+        citation: citation,
+      },
+    })
+    return await modal.present()
   }
 
-  editCitation(citation: Citation){
-    this.presentModalEdit(citation);
+  editCitation(citation: Citation) {
+    this.presentModalEdit(citation)
   }
 
-  createCitation(){
-    this.presentModal();
+  createCitation() {
+    this.presentModal()
   }
 
-  deleteCitation(id: string){
-    this.citationService.delete(id);
+  deleteCitation(id: string) {
+    this.citationService.delete(id)
+  }
+
+  endCitation(citation: Citation) {
+    citation.state = false
+    this.citationService.update(citation.id, citation)
   }
 
   getCitations() {
     this.storage.get('user').then((val) => {
-      this.citationService.get(val.phone).subscribe((data) => {
-        this.citations = data.map((t) => {
-          return {
-            id: t.payload.doc.id,
-            ...(t.payload.doc.data() as Citation),
-          }
-        })
-      })
+      this.userType = val.userType
+      var newDate = new Date(this.date)
+      if (val.type == 'client') {
+        this.citationService
+          .get(
+            val.phone,
+            newDate.getDate(),
+            newDate.getMonth(),
+            newDate.getFullYear(),
+          )
+          .subscribe((data) => {
+            this.citations = data.map((t) => {
+              return {
+                id: t.payload.doc.id,
+                ...(t.payload.doc.data() as Citation),
+              }
+            })
+          })
+      } else {
+        this.citationService
+          .getAll(newDate.getDate(), newDate.getMonth(), newDate.getFullYear())
+          .subscribe((data) => {
+            this.citations = data.map((t) => {
+              return {
+                id: t.payload.doc.id,
+                ...(t.payload.doc.data() as Citation),
+              }
+            })
+          })
+      }
     })
   }
 }

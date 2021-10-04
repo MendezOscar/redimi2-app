@@ -52,6 +52,10 @@ export class CitationEditPage implements OnInit {
 
   createCitation() {
     this.citation.day = this.date;
+    var newDate = new Date(this.date);
+    this.citation.dayOfWeek = newDate.getDate();
+    this.citation.month = newDate.getMonth();
+    this.citation.year = newDate.getFullYear();
     var ifValidateDate = this.validateDate(new Date(this.date))
     if (ifValidateDate) {
       this.citationService.update(this.citation.id, this.citation);

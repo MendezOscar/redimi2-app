@@ -1,9 +1,9 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-img class="img" src="../../../assets/LogoHome.png"></ion-img>
+    </ion-toolbar>
+</ion-header>
 <ion-content [fullscreen]="true">
-    <ion-header collapse="condense">
-        <ion-toolbar>
-            <ion-img class="img" src="../../../assets/LogoHome.png"></ion-img>
-        </ion-toolbar>
-    </ion-header>
 
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
         <ion-fab-button (click)="createCitation()">
@@ -14,6 +14,12 @@
     <ion-grid>
         <ion-row>
             <ion-col>
+                <ion-item>
+                    <ion-label>Filtrar: </ion-label>
+                    <ion-datetime [(ngModel)]="date" [ngModelOptions]="{standalone: true}" placeholder="Seleccionar fecha" (ionChange)="getCitations()"></ion-datetime>
+                </ion-item>
+                <br>
+                <br>
                 <ion-label class="ion-text-uppercase ion-margin-start">Mis citas</ion-label>
                 <ion-card *ngFor="let item of citations" class="card">
                     <ion-item>
@@ -23,6 +29,7 @@
                         <ion-label>
                             <h3>{{item.day | date:'yyyy/MM/dd h:mm a'}}</h3>
                         </ion-label>
+                        <ion-icon name="checkmark-outline" *ngIf="userType === 'owner'" (click)="endCitation(item)"></ion-icon>
                         <ion-icon name="pencil" (click)="editCitation(item)"></ion-icon>
                         <ion-icon name="trash" (click)="deleteCitation(item.id)"></ion-icon>
                     </ion-item>

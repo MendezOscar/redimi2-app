@@ -10,13 +10,14 @@
                 <form>
 
                     <ion-item>
+                        <ion-label>Seleccionar fecha: </ion-label>
                         <ion-datetime displayFormat="D MMM YYYY hh:mm a" min="2021" max="2100" value="2021-10-02T11:06Z" [(ngModel)]="date" [ngModelOptions]="{standalone: true}"></ion-datetime>
                     </ion-item>
 
                     <ion-row>
                         <ion-col>
                             <br>
-                            <ion-button type="submit" (click)="createCitation()" color="danger" expand="block">Reservar</ion-button>
+                            <ion-button type="submit" (click)="createCitation()" color="danger" expand="block">Editar reserva</ion-button>
                             <ion-button type="submit" (click)="close()" color="primary" expand="block">Cerrar</ion-button>
                         </ion-col>
                     </ion-row>

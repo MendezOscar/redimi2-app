@@ -33,11 +33,12 @@ export class RegisterPage implements OnInit {
   }
 
   create() {
-    this.user = new User()
-    this.user.name = this.name
-    this.user.password = this.password
-    this.user.lastName = this.lastName
+    this.user = new User();
+    this.user.name = this.name;
+    this.user.password = this.password;
+    this.user.lastName = this.lastName;
     this.user.phone = this.phone;
+    this.user.type = "client";
 
     this.authService.getByEmail(this.phone).subscribe((data) => {
       if (data.length == 0) {
